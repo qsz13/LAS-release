@@ -38,9 +38,9 @@ visualize <- function(g,result, x, k, cutoff=1, path=NULL)
   size = length(V(subg))
   scale = (17/961)*size + 1999/961
   
-  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1
-                  )
+  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1)
   ggsave(output, file=paste(as.character(x),".jpg",sep = ""), path=path,w=4, h=3, scale=scale,limitsize=FALSE)
+  return(output)
 }
 
 #' visualize with w community
@@ -57,16 +57,14 @@ visualize.with.community<-function(g,result, x, k=2, cutoff=1,community.min=5,pa
   wc = getCommunity(z, g,cutoff,  community.min)
   member = membership(wc)
   community_index = names(sizes(wc)[sizes(wc)>community.min])
-  print(length(community_index))
   if(length(community_index)>7)
   {
-    print("asdfasdf")
+    print("comunity too large.")
     return()
   }
   
   subg = induced.subgraph(g, unique(c(X,Y,W)))
   
-#   type <- vector(mode="character", length=length(V(subg)))
   type <- rep("other", length(V(subg)))
   type <- setNames(type, V(subg)$name)
 
@@ -78,20 +76,16 @@ visualize.with.community<-function(g,result, x, k=2, cutoff=1,community.min=5,pa
     time<-time+1
   }
 
- 
-
-    type[Y] = "Y"
+  type[Y] = "Y"
 
   type[X] = "X"
   
   network = asNetwork(subg)
   size = length(V(subg))
   scale = (17/961)*size + 1999/961
-  print(scale)
 
-  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1
-  )
+  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1)
   
-ggsave(output, file=paste(as.character(x),".jpg",sep = ""), path=path,w=4, h=3, scale=scale,limitsize=FALSE)
-  output
+  ggsave(output, file=paste(as.character(x),".jpg",sep = ""), path=path,w=4, h=3, scale=scale,limitsize=FALSE)
+  return(output)
 }

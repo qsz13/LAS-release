@@ -33,36 +33,29 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
   
   cl <- makeCluster(n.cores, outfile="")
   registerDoParallel(cl)
-  
-  ptm <- proc.time()
-  
-  cat("loop begin\n")
-  
+
   result <- foreach(i=1:row.size) %dopar%
-{
-  xy <- express.matrix[connected.list[i,1],]*express.matrix[connected.list[i,2],]
-  la.vector <- c(xy%*%express.matrix.t)
-  lfdr <- fdrtool(la.vector, verbose=FALSE, plot = FALSE)$lfdr
-  return(rownames(express.matrix)[which(lfdr<0.2)])
-  
-}
-stopCluster(cl)
-print(proc.time() - ptm)
-
-node.z <- Matrix(0, nrow = size, ncol = size,dimnames=list(rownames(express.matrix),rownames(express.matrix)))
-for(i in 1:row.size)
-{
-  if(length(result[[i]])!=0 )
   {
-    x = connected.list[i,1]
-    y = connected.list[i,2]
-    node.z[x,c(result[[i]])] = 1
-    node.z[y,c(result[[i]])] = 1
+    xy <- express.matrix[connected.list[i,1],]*express.matrix[connected.list[i,2],]
+    la.vector <- c(xy%*%express.matrix.t)
+    lfdr <- fdrtool(la.vector, verbose=FALSE, plot = FALSE)$lfdr
+    return(rownames(express.matrix)[which(lfdr<0.2)])
+    
   }
-}
+  stopCluster(cl)
 
-result = node.z
-return(result)
+  node.z <- Matrix(0, nrow = size, ncol = size,dimnames=list(rownames(express.matrix),rownames(express.matrix)))
+  for(i in 1:row.size)
+  {
+    if(length(result[[i]])!=0 )
+    {
+      x = connected.list[i,1]
+      y = connected.list[i,2]
+      node.z[x,c(result[[i]])] = 1
+      node.z[y,c(result[[i]])] = 1
+    }
+  }
+  return(node.z)
 
 }
 

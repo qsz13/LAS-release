@@ -30,10 +30,6 @@ kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("
   relate.matrix = relate.matrix[order(rownames(relate.matrix)), ] 
   relate.matrix = relate.matrix[,order(colnames(relate.matrix)) ] 
   
-  
-  
-  
-  
   adjacency1 <- get.adjacency(network.graph, type="both")
   adjacency2 <- get.adjacency(connect.neighborhood(network.graph,2), type="both")-adjacency1
   
@@ -64,8 +60,6 @@ kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("
   }
   
   result <- relate.matrix%*%weight.matrix
-  
-  
   return(result)
   
 }
