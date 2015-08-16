@@ -5,9 +5,9 @@
 #' @param smoothing.normalize Different ways to normalize the result.
 #' @return A matrix representing the kernel density of each gene. Each row is a gene, columns are the weights of scouting genes for the gene.
 #' @examples
-#'  kernel.density(,,one)
-#'  kernel.density(,,squareM)
-#'  kernel.density(,,none)
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))
 #' @export
 #' 
 kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("one","squareM","none") ) {

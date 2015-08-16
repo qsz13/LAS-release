@@ -5,7 +5,7 @@
 #' @param k Integer giving the order of the network.
 #' @param n.cores Core number used for parallel computing.
 #' @return A logical matrix representing the LA-scouting genes for each gene. Rows represent the center gene id and columns represents the LA-scouting genes.
-#' @example lascouting(,,2,4)
+#' @example lascouting(graph,matrix,k=2,n.cores=4)
 #' @export
 #' 
 lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){

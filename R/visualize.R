@@ -1,13 +1,13 @@
-#' Visualize: Generate a graph 
+#' Visualize: Generate a graph which vividly displays the gene x,y and w
 #' 
 #' 
-#' @param graph
-#' @param result A function to find gene z
-#' @param x Gene X
-#' @param k A number of the length of step 
-#' @param cutoff A specific number to filter gene w from gene z
-#' @example visualize(,,,,0.8)
-#' @return 
+#' @param graph The fraph of gene network.
+#' @param result A function to find genes z of a gene x.
+#' @param x The Gene the graph is generated for.
+#' @param k A specific number stands for the length of step from gene y to gene x.
+#' @param cutoff A specific number to filter gene w from gene z.
+#' @example visualize(graph,result,x,k=2,cutoff=1,path=NULL)
+#' @return a graph of gene x,y and w
 #' @export 
 visualize <- function(graph,result, x, k=2, cutoff=1, path=NULL)
 {
@@ -43,7 +43,17 @@ visualize <- function(graph,result, x, k=2, cutoff=1, path=NULL)
   return(output)
 }
 
-#' visualize with w community
+#' visualize with w community: Generate a graph of genes w and their community in different colors
+#' @param graph The fraph of gene network.
+#' @param result A function to find genes z of a gene x.
+#' @param x The Gene the graph is generated for.
+#' @param k A specific number stands for the length of step from gene y to gene x.
+#' @param cutoff A specific number to filter gene w from gene z.
+#' @param cummunity.min An Integer confines the least number of genes in a community of w shown in graph. 
+#' @param path The path where the result graph is saved to.The default path is the original path of input graph.
+#' @return a graph displays genes w and their correspongding community in different colors.
+#' @example visualize.with.community(graph, result, x, k=2, cutoff=1, community.min=5, path=NULL)
+#'
 #' @export
 #'
 visualize.with.community<-function(graph,result, x, k=2, cutoff=1,community.min=5,path=NULL)

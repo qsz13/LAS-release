@@ -80,13 +80,13 @@ cutoffz <- function(z, cutoff)
   return(zcutoff)
 }
 
-#' xw.distance
-#' @param graph 
+#' xw.distance Generate a table contains distance between all genes x and their correspongding genes w. 
+#' @param graph The graph of the gene network.
 #' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network. 
-#' @param cutoff 
+#' @param cutoff A number used to find LA scouting gene z. 
 #' @param n.cores Core number used for parallel computing.
 #' @return a table contains distance between all genes x and their correspongding genes w. 
-#' @example xw.distance(,,0.8,4)
+#' @example xw.distance(graph, z.matrix, cutoff=0.8, n.cores=4)
 #' @export
 #' 
 xw.distance <- function(graph, z.matrix, cutoff=0.8, n.cores=4)
