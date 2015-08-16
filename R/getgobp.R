@@ -10,7 +10,7 @@
 #' @example getgobp(,,2,4,0.8,5,NA)
 #' @export
 #' 
-getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=0.8, community.min=5, term.limit=NA)
+getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
   
   community = apply(z.matrix, 1, getCommunity, graph,cutoff,community.min)
@@ -23,72 +23,146 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=0.8, community.min=5
   cat('loop begin\n')
   
   resulttable <- foreach(i=1:length(names(community)), .combine='rbind') %dopar%
+  {
+    x = names(community)[i]
+    wc = community[[x]]
+    member = membership(wc)
+    
+    community_index = names(sizes(wc)[sizes(wc)>community.min])
+    
+    
+    sel.entrez<-x
+    xgo = getGO(sel.entrez, all.entrez)
+    
+    if(is.null(xgo)||is.na(xgo$Pvalue)||length(xgo$Term)==0)
+    {
+      return(NULL)
+    }  
+    else
+    {
+      if(!is.na(term.limit))
+      {
+        xgo = xgo[1:term.limit,]
+      }
+      xgo <- paste(xgo$Term, signif(xgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
+    }
+    xk = V(graph)[unlist(igraph::neighborhood(graph,k,nodes=x))]$name
+
+    sel.entrez = xk
+    xkgo = getGO(sel.entrez, all.entrez)
+    
+    
+    if(is.null(xkgo)||is.na(xkgo$Pvalue)||length(xkgo$Term)==0)
+    {
+      return(NULL)
+    }
+    else
+    {
+      if(!is.na(term.limit))
+      {
+        xkgo = xkgo[1:term.limit,]
+      }
+      xkgo <- paste(xkgo$Term, signif(xkgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
+    }
+    
+    w.result = do.call("rbind",lapply(community_index, get.W.GO, member, xk,x, graph, all.entrez, term.limit))
+    if(is.null(w.result))
+    {
+      return(NULL)
+    }
+    else
+    {
+      print(x)
+      return(rbind(resulttable,cbind(x, xgo, xkgo,w.result)))
+    }
+  }
+  stopCluster(cl)
+  return(resulttable)
+
+}
+
+#' get GOBP x in one line
+#' 
+#' @export
+#' 
+getgobp.x.in.one.line <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
-  x = names(community)[i]
-  #   for(x in names(community)){
-  wc = community[[x]]
-  member = membership(wc)
+  community = apply(z.matrix, 1, getCommunity, graph,cutoff,community.min)
+  community = community[!sapply(community, is.null)]
+  all.entrez<-colnames(z.matrix)
   
-  community_index = names(sizes(wc)[sizes(wc)>5])
+  resulttable = NULL
+  cl <- makeCluster(n.cores, outfile="")
+  registerDoParallel(cl)
+  cat('loop begin\n')
   
-  
-  sel.entrez<-x
-  xgo = getGO(sel.entrez, all.entrez)
-  
-  if(is.null(xgo)||is.na(xgo$Pvalue)||length(xgo$Term)==0)
+  resulttable <- foreach(i=1:length(names(community)), .combine='rbind') %dopar%
   {
-    return(NULL)
-  }  
-  else
-  {
-    if(!is.na(term.limit))
+    x = names(community)[i]
+    
+    wc = community[[x]]
+    member = membership(wc)
+    
+    community_index = names(sizes(wc)[sizes(wc)>5])
+    
+    
+    sel.entrez<-x
+    xgo = getGO(sel.entrez, all.entrez)
+    
+    if(is.null(xgo)||is.na(xgo$Pvalue)||length(xgo$Term)==0)
     {
-      xgo = xgo[1:term.limit,]
-    }
-    xgo <- paste(xgo$Term, signif(xgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
-  }
-  
-  #     xk = neighborhood(graph,k,nodes=x)
-  xk = V(graph)[unlist(neighborhood(graph,k,nodes=x))]$name
-  #print(xk)
-  sel.entrez = xk
-  xkgo = getGO(sel.entrez, all.entrez)
-  
-  
-  if(is.null(xkgo)||is.na(xkgo$Pvalue)||length(xkgo$Term)==0)
-  {
-    return(NULL)
-  }
-  else
-  {
-    if(!is.na(term.limit))
+      return(NULL)
+    }  
+    else
     {
-      xkgo = xkgo[1:term.limit,]
+      if(!is.na(term.limit))
+      {
+        xgo = xgo[1:term.limit,]
+      }
+      xgo <- paste(xgo$Term, signif(xgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
     }
-    xkgo <- paste(xkgo$Term, signif(xkgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
+    xk = V(graph)[unlist(igraph::neighborhood(graph,k,nodes=x))]$name
+    
+    sel.entrez = xk
+    xkgo = getGO(sel.entrez, all.entrez)
+    
+    
+    if(is.null(xkgo)||is.na(xkgo$Pvalue)||length(xkgo$Term)==0)
+    {
+      return(NULL)
+    }
+    else
+    {
+      if(!is.na(term.limit))
+      {
+        xkgo = xkgo[1:term.limit,]
+      }
+      xkgo <- paste(xkgo$Term, signif(xkgo$Pvalue,digits = 5), sep=": ", collapse = '\n')
+    }
+    
+    w.result = do.call("rbind",lapply(community_index, get.W.GO, member, xk,x, graph, all.entrez, term.limit))
+    if(is.null(w.result))
+    {
+      return(NULL)
+    }
+    else
+    {
+      print(x)
+      w = paste(w.result[,1], collapse =" ")
+      wgo = paste(w.result[,2], collapse ="\n")
+      xk.w.semantic.similarity = paste(w.result[,3], collapse =" ")
+      x.w.avg.distance = paste(w.result[,4], collapse =" ")
+      return(rbind(resulttable,cbind(x, xgo, xkgo,w, wgo,xk.w.semantic.similarity,x.w.avg.distance )))
+    }
   }
-  
-  w.result = do.call("rbind",lapply(community_index, gen.data, member, xk,x, graph, all.entrez, term.limit))
-  if(is.null(w.result))
-  {
-    return(NULL)
-  }
-  else
-  {
-    print(x)
-    return(rbind(resulttable,cbind(x, xgo, xkgo,w.result)))
-  }
+  stopCluster(cl)
+  return(resulttable)
 }
-stopCluster(cl)
-return(resulttable)
-
-}
 
 
 
 
-
-gen.data <- function(ci, member, xk,x,graph, all.entrez, term.limit)
+get.W.GO <- function(ci, member, xk,x,graph, all.entrez, term.limit)
 {
   
   

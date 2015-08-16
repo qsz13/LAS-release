@@ -51,13 +51,7 @@ getCommunity <- function(z, g,cutoff, community.min)
   }
 }
 
-#' get GO
-#' @param sel.entrez 
-#' @param all.entrez 
-#' @return 
-#' @example getGO()
-#' @export
-#' 
+ 
 getGO <- function(sel.entrez,all.entrez)
 {
   params <- new("GOHyperGParams", geneIds=sel.entrez, universeGeneIds=all.entrez, ontology="BP", pvalueCutoff=0.01,conditional=F, testDirection="over", annotation="hgu133plus2.db")

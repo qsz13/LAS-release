@@ -61,7 +61,7 @@ for(i in 1:row.size)
   }
 }
 
-result = node.z#z.kernel.density(node.z, network.graph)
+result = node.z
 return(result)
 
 }
