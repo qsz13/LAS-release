@@ -1,0 +1,12 @@
+Package: LAS
+Type: Package
+Title: Find LA-scouting genes
+Version: 0.2
+Date: 2015-05-04
+Author: Shangzhao Qiu, Yan Yan
+Maintainer: Shangzhao Qiu <qsz1328@gmail.com>
+Description: Find liquid association scouting genes on a gene network and evaluate the result with kernel density estimation.
+License: GPL (>= 2)
+Imports:  BH
+LinkingTo: Rcpp,BH
+Depends: foreach, doParallel, igraph, GOstats, GOSemSim, Rcpp, fdrtool, GGally, intergraph,sna,ggplot2
