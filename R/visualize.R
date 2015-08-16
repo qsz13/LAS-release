@@ -9,11 +9,11 @@
 #' @example visualize(,,,,0.8)
 #' @return 
 #' @export 
-visualize <- function(graph,result, x, k, cutoff=1, path=NULL)
+visualize <- function(graph,result, x, k=2, cutoff=1, path=NULL)
 {
   
   X = as.character(x)
-  Y = V(graph)$name[unlist(igraph::neighborhood(graph, 2, nodes=X))]
+  Y = V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes=X))]
   
   z = result[X,]
   W = names(z[z>cutoff])
