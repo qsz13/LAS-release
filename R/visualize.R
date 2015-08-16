@@ -1,7 +1,7 @@
 #' Visualize: Generate a graph 
 #' 
 #' 
-#' @param g 
+#' @param graph
 #' @param result A function to find gene z
 #' @param x Gene X
 #' @param k A number of the length of step 
@@ -9,16 +9,16 @@
 #' @example visualize(,,,,0.8)
 #' @return 
 #' @export 
-visualize <- function(g,result, x, k, cutoff=1, path=NULL)
+visualize <- function(graph,result, x, k, cutoff=1, path=NULL)
 {
   
   X = as.character(x)
-  Y = V(g)$name[unlist(igraph::neighborhood(g, 2, nodes=X))]
+  Y = V(graph)$name[unlist(igraph::neighborhood(graph, 2, nodes=X))]
   
   z = result[X,]
   W = names(z[z>cutoff])
 
-  subg = induced.subgraph(g, unique(c(X,Y,W)))
+  subg = induced.subgraph(graph, unique(c(X,Y,W)))
 
   type <- vector(mode="character", length=length(V(subg)))
   type <- setNames(type, V(subg)$name)
@@ -46,15 +46,15 @@ visualize <- function(g,result, x, k, cutoff=1, path=NULL)
 #' visualize with w community
 #' @export
 #'
-visualize.with.community<-function(g,result, x, k=2, cutoff=1,community.min=5,path=NULL)
+visualize.with.community<-function(graph,result, x, k=2, cutoff=1,community.min=5,path=NULL)
 {
   X = as.character(x)
-  Y = V(g)$name[unlist(igraph::neighborhood(g, k, nodes=X))]
+  Y = V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes=X))]
   z = result[X,]
 
   W = names(z[z>cutoff])
   
-  wc = getCommunity(z, g,cutoff,  community.min)
+  wc = getCommunity(z, graph,cutoff,  community.min)
   member = membership(wc)
   community_index = names(sizes(wc)[sizes(wc)>community.min])
   if(length(community_index)>7)
@@ -63,7 +63,7 @@ visualize.with.community<-function(g,result, x, k=2, cutoff=1,community.min=5,pa
     return()
   }
   
-  subg = induced.subgraph(g, unique(c(X,Y,W)))
+  subg = induced.subgraph(graph, unique(c(X,Y,W)))
   
   type <- rep("other", length(V(subg)))
   type <- setNames(type, V(subg)$name)
