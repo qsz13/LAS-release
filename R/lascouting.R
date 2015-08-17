@@ -1,4 +1,6 @@
 #' Find the liquid association scouting gene
+#' 
+#' \code{lascouting()} is used to find 
 #' @useDynLib LAS
 #' @param network.graph An igraph object representing the gene network.
 #' @param express.matrix A matrix represeting the express matrix for the genes in gene network.Row names are the gene id in gene network.

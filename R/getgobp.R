@@ -1,4 +1,6 @@
-#' Generate a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
+#' Greate a table to record results.
+#' 
+#' \code{getgobp()} generates a table. It can be used to record the information of  gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
 #' the similarity of gene w and genes within k steps of gene x, the average distance between gene x and gene w.
 #' A gene x may correspond with several w communities. Thus one community takes a row in the table.
 #' @param graph The graph of gene network.
