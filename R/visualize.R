@@ -10,9 +10,10 @@
 #' @param cutoff A specific number to filter gene w from gene z.
 #' @example 
 #' # Create sample data for examples.
+#' library(stats)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
-#' relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
+#' relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' #use the first normalize method as an example
 #' kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
 #' visualize(graph,kernel.result,x,k=2,cutoff=1,path=NULL)
@@ -64,6 +65,7 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @return a graph displays genes w and their correspongding community in different colors.
 #' @example 
 #' # Create sample data for examples.
+#' library(stats)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)

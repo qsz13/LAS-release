@@ -10,7 +10,8 @@
 #' @return A logical matrix representing the LA-scouting genes for each gene. Rows represent the center gene id and columns represents the LA-scouting genes.
 #' @example 
 #' # Create sample data for examples.
-#' matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
+#' matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' library(stats)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' lascouting(graph,matrix,k=2,n.cores=4)

@@ -90,7 +90,8 @@ cutoffz <- function(z, cutoff)
 #' @return a table contains distance between all genes x and their correspongding genes w. 
 #' @example 
 #' # Create sample data for examples.
-#' z.matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
+#' z.matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' library(stats)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' xw.distance(graph, z.matrix, cutoff=0.8, n.cores=4)
