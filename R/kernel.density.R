@@ -15,14 +15,14 @@
 #' @param relate.matrix The matrix returned by lascouting.
 #' @param network.graph The igraph object representing the gene network.
 #' @param smoothing.normalize Different ways to normalize the result.
-#' @return A matrix representing the kernel density of each gene. Each row is a gene, columns are the weights of scouting 
-#' genes for the gene.  
+#' @return A matrix representing the kernel density of each gene. Each row is a gene, columns 
+#' are the weights of scouting genes for the gene.  
 #' @examples
 #' # Create sample data for examples.
 #' relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
-#' kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
 #'  kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))
 #'  kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))
 #' @export
