@@ -2,11 +2,38 @@
 % Please edit documentation in R/visualize.R
 \name{visualize}
 \alias{visualize}
-\title{visualize}
+\title{Visualize: Generate a graph which vividly displays the gene x,y and w.}
 \usage{
-visualize(g, result, x, k, cutoff = 0.8)
+visualize(graph, kernel.result, x, k = 2, cutoff = 1, path = NULL)
+}
+\arguments{
+\item{graph}{The graph of gene network.}
+
+\item{kernel.result}{The result of kernel.density which finds genes z of a gene x.}
+
+\item{x}{The Gene the graph is generated for.}
+
+\item{k}{A specific number stands for the length of step from gene y to gene x.}
+
+\item{cutoff}{A specific number to filter gene w from gene z.}
+}
+\value{
+a graph of gene x,y and w
 }
 \description{
-visualize
+\code{visualize()} generates a graph. It is used to intuitively and vividly display the layout of gene x, y and w.
+}
+\examples{
+# Create sample data for examples.
+library(stats)
+library(igraph)
+graph <- erdos.renyi.game(50,0.3)
+relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#use the first normalize method as an example
+kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
+visualize(graph,kernel.result,x,k=2,cutoff=1,path=NULL)
+}
+\seealso{
+\code{\link{kernel.result}}
 }
 

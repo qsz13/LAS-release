@@ -8,7 +8,9 @@
 #' @param x The Gene the graph is generated for.
 #' @param k A specific number stands for the length of step from gene y to gene x.
 #' @param cutoff A specific number to filter gene w from gene z.
-#' @example 
+#' @return a graph of gene x,y and w
+#' @export 
+#' @examples 
 #' # Create sample data for examples.
 #' library(stats)
 #' library(igraph)
@@ -17,8 +19,7 @@
 #' #use the first normalize method as an example
 #' kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
 #' visualize(graph,kernel.result,x,k=2,cutoff=1,path=NULL)
-#' @return a graph of gene x,y and w
-#' @export 
+#' 
 visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 {
   
@@ -63,7 +64,7 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @param cummunity.min An Integer confines the least number of genes in a community of w shown in graph. 
 #' @param path The path where the result graph is saved to.The default path is the original path of input graph.
 #' @return a graph displays genes w and their correspongding community in different colors.
-#' @example 
+#' @examples 
 #' # Create sample data for examples.
 #' library(stats)
 #' library(igraph)

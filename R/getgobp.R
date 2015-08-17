@@ -12,14 +12,15 @@
 #' @param community.min An Integer confines the min gene numbers in community. 
 #' @param term.limit A parameter indicates there is no limit of content in a line of the table.
 #' @return A form contains id of gene w, GO info of gene w , xk.w.semantic.similarity, x.w.avg.distance.
-#' @example 
+#' @export
+#' @examples 
 #' # Create sample data for examples.
 #' library(stats)
 #' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' getgobp(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
-#' @export
+#' 
 #' 
 getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
@@ -105,7 +106,8 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 #' @param community.min An Integer confines the min gene numbers in community. 
 #' @param term.limit A parameter indicates there is no limit of content in a line of the table.
 #' @return A form contains id of gene w, GO info of gene w , semantic similarity of xk and gene w, average distance between gene x and w.
-#' @example 
+#' @export
+#' @examples 
 #' # Create sample data for examples.
 #' library(stats)
 #' library(igraph)
@@ -113,7 +115,7 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 #' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' getgobp.x.in.one.line(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 #' 
-#' @export
+#' 
 #' 
 getgobp.x.in.one.line <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
