@@ -15,8 +15,6 @@
 #' @export
 #' @examples 
 #' # Create sample data for examples.
-#' library(stats)
-#' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' getgobp(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
@@ -109,8 +107,6 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 #' @export
 #' @examples 
 #' # Create sample data for examples.
-#' library(stats)
-#' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' getgobp.x.in.one.line(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)

@@ -25,8 +25,6 @@ a graph of gene x,y and w
 }
 \examples{
 # Create sample data for examples.
-library(stats)
-library(igraph)
 graph <- erdos.renyi.game(50,0.3)
 relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #use the first normalize method as an example

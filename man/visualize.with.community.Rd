@@ -30,8 +30,6 @@ visualize with w community: Generate a graph of genes w and their community in d
 }
 \examples{
 # Create sample data for examples.
-library(stats)
-library(igraph)
 graph <- erdos.renyi.game(50,0.3)
 relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
 #use the first normalize method as an example

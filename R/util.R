@@ -92,8 +92,6 @@ cutoffz <- function(z, cutoff)
 #' @examples 
 #' # Create sample data for examples.
 #' z.matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#' library(stats)
-#' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' xw.distance(graph, z.matrix, cutoff=0.8, n.cores=4)
 #' 

@@ -12,8 +12,6 @@
 #' @export 
 #' @examples 
 #' # Create sample data for examples.
-#' library(stats)
-#' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
 #' #use the first normalize method as an example
@@ -66,8 +64,6 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @return a graph displays genes w and their correspongding community in different colors.
 #' @examples 
 #' # Create sample data for examples.
-#' library(stats)
-#' library(igraph)
 #' graph <- erdos.renyi.game(50,0.3)
 #' relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
 #' #use the first normalize method as an example
