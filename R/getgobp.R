@@ -1,14 +1,24 @@
-#' Generate a result file
-#' @param graph
+#' Greate a table to record results. Every gene w's community takes over a row.
+#' 
+#' \code{getgobp()} generates a table. It can be used to record the information of  gene x,  gostats of x, 
+#' gostats of genes within k steps of x, gene w, gostats of w, the similarity of gene w and genes within k 
+#' steps of gene x, the average distance between gene x and gene w.
+#' A gene x may correspond with several w communities. Thus one community takes a row in the table.
+#' @param graph The graph of gene network.
 #' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network.
-#' @param k Integer giving the order of the network.
-#' @param n.cores Core number used for parallel computing.
-#' @param cutoff 
-#' @param community.min An Integer giving the min gene numbers in community. 
-#' @param term.limit 
-#' @return A form contains id of gene w, GO info of gene w , xk.w.semantic.similarity, x.w.avg.distance
-#' @example getgobp(,,2,4,0.8,5,NA)
+#' @param k An Integer giving the order of the network.
+#' @param n.cores A Core number used for parallel computing.
+#' @param cutoff A number used to find LA scouting gene z.
+#' @param community.min An Integer confines the min gene numbers in community. 
+#' @param term.limit A parameter indicates there is no limit of content in a line of the table.
+#' @return A form contains id of gene w, GO info of gene w , xk.w.semantic.similarity, x.w.avg.distance.
 #' @export
+#' @examples 
+#' # Create sample data for examples.
+#' graph <- erdos.renyi.game(50,0.3)
+#' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' getgobp(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
+#' 
 #' 
 getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
@@ -81,9 +91,27 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 
 }
 
-#' get GOBP x in one line
+#' Greate a table to record results. Every gene x takes over a row.
 #' 
+#' \code{getgobp.x.in.one.line()}generates a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
+#' the similarity of gene w and genes within k steps of gene x, the average distance between gene x and gene w.
+#' Regardless of a gene X may correspond with multiple w communities. A gene X only takes a row in the table.
+#' @param graph The graph of gene network.
+#' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network.
+#' @param k An Integer giving the order of the network.
+#' @param n.cores A Core number used for parallel computing.
+#' @param cutoff A number used to find LA scouting gene z.
+#' @param community.min An Integer confines the min gene numbers in community. 
+#' @param term.limit A parameter indicates there is no limit of content in a line of the table.
+#' @return A form contains id of gene w, GO info of gene w , semantic similarity of xk and gene w, average distance between gene x and w.
 #' @export
+#' @examples 
+#' # Create sample data for examples.
+#' graph <- erdos.renyi.game(50,0.3)
+#' z_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' getgobp.x.in.one.line(graph, z_matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
+#' 
+#' 
 #' 
 getgobp.x.in.one.line <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {

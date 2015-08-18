@@ -1,14 +1,31 @@
-#' Evaluate the result using kernel density estimation.
+#' Evaluate the result using kernel density estimation.#' 
+#'  
+#' There are three common ways to invoke \code{kernel.density}:
+#' \itemize{
+#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))}
+#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))}
+#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))}
+#'   }
+#' The first method is used when the total weight of all genes z is set to 'one'.
+#' In this way, those gene z surrounded by more genes z wll not take advantages over those surrounded by fewer genes.
+#' In contrast, the sedcond method takes the number of genes around into consideration, the result of the first method will
+#' multiply the sqare of the number of genes around.
+#' The third method does not normalize the data.
 #' 
 #' @param relate.matrix The matrix returned by lascouting.
 #' @param network.graph The igraph object representing the gene network.
 #' @param smoothing.normalize Different ways to normalize the result.
-#' @return A matrix representing the kernel density of each gene. Each row is a gene, columns are the weights of scouting genes for the gene.
-#' @examples
-#'  kernel.density(,,one)
-#'  kernel.density(,,squareM)
-#'  kernel.density(,,none)
+#' @return A matrix representing the kernel density of each gene. Each row is a gene, columns 
+#' are the weights of scouting genes for the gene.  
 #' @export
+#' @examples
+#' # Create sample data for examples.
+#' relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' graph <- erdos.renyi.game(50,0.3)
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))
+#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))
+#' 
 #' 
 kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("one","squareM","none") ) {
   smoothing.normalize <- match.arg(smoothing.normalize)

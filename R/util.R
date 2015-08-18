@@ -80,14 +80,21 @@ cutoffz <- function(z, cutoff)
   return(zcutoff)
 }
 
-#' xw.distance
-#' @param graph 
+#' Create a table to record the distance between gene x and gene w.
+#' 
+#' \code{xw.distance()} generates a table contains distance between all genes x and their correspongding genes w. 
+#' @param graph The graph of the gene network.
 #' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network. 
-#' @param cutoff 
+#' @param cutoff A number used to find LA scouting gene z. 
 #' @param n.cores Core number used for parallel computing.
 #' @return a table contains distance between all genes x and their correspongding genes w. 
-#' @example xw.distance(,,0.8,4)
 #' @export
+#' @examples 
+#' # Create sample data for examples.
+#' z.matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+#' graph <- erdos.renyi.game(50,0.3)
+#' xw.distance(graph, z.matrix, cutoff=0.8, n.cores=4)
+#' 
 #' 
 xw.distance <- function(graph, z.matrix, cutoff=0.8, n.cores=4)
 {
