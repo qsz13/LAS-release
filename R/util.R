@@ -89,11 +89,6 @@ cutoffz <- function(z, cutoff)
 #' @param n.cores Core number used for parallel computing.
 #' @return a table contains distance between all genes x and their correspongding genes w. 
 #' @export
-#' @examples 
-#' # Create sample data for examples.
-#' z.matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#' graph <- erdos.renyi.game(50,0.3)
-#' xw.distance(graph, z.matrix, cutoff=0.8, n.cores=4)
 #' 
 #' 
 xw.distance <- function(graph, z.matrix, cutoff=0.8, n.cores=4)

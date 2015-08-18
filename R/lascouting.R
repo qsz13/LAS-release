@@ -9,13 +9,6 @@
 #' @param n.cores Core number used for parallel computing.
 #' @return A logical matrix representing the LA-scouting genes for each gene. Rows represent the center gene id and columns represents the LA-scouting genes.
 #' @export
-#' @examples 
-#' # Create sample data for examples. 
-#' graph <- erdos.renyi.game(50,0.3)
-#' matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#' seq <- seq(from=1,to=50)
-#' row.names(matrix) <-seq
-#' lascouting(graph,matrix,k=2,n.cores=4)
 #' 
 #' 
 lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
@@ -37,6 +30,7 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
     common.node = network.node
   }
   size <- length(common.node)
+  print(size)
   
   express.matrix = normalizeInputMatrix(express.matrix)
   
@@ -60,6 +54,7 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
 
     xy <- express.matrix[connected.list[i,1],]*express.matrix[connected.list[i,2],]
     la.vector <- c(xy%*%express.matrix.t)
+    print(la.vector)
     lfdr <- fdrtool(la.vector, verbose=FALSE, plot = FALSE)$lfdr
     return(rownames(express.matrix)[which(lfdr<0.2)])
     

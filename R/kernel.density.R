@@ -18,13 +18,6 @@
 #' @return A matrix representing the kernel density of each gene. Each row is a gene, columns 
 #' are the weights of scouting genes for the gene.  
 #' @export
-#' @examples
-#' # Create sample data for examples.
-#' relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#' graph <- erdos.renyi.game(50,0.3)
-#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
-#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))
-#'  kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))
 #' 
 #' 
 kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("one","squareM","none") ) {

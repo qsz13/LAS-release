@@ -10,13 +10,7 @@
 #' @param cutoff A specific number to filter gene w from gene z.
 #' @return a graph of gene x,y and w
 #' @export 
-#' @examples 
-#' # Create sample data for examples.
-#' graph <- erdos.renyi.game(50,0.3)
-#' relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#' #use the first normalize method as an example
-#' kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
-#' visualize(graph,kernel.result,x,k=2,cutoff=1,path=NULL)
+#' 
 #' 
 visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 {
@@ -62,14 +56,6 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @param cummunity.min An Integer confines the least number of genes in a community of w shown in graph. 
 #' @param path The path where the result graph is saved to.The default path is the original path of input graph.
 #' @return a graph displays genes w and their correspongding community in different colors.
-#' @examples 
-#' # Create sample data for examples.
-#' graph <- erdos.renyi.game(50,0.3)
-#' relate_matrix <- matrix(date=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TURE, dimnames=NULL)
-#' #use the first normalize method as an example
-#' kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
-#' visualize.with.community(graph,kernel.result,x,k=2,cutoff=1,community.min=5,path=NULL)
-#'
 #' @export
 #'
 visualize.with.community<-function(graph,kernel.result, x, k=2, cutoff=1,community.min=5,path=NULL)
