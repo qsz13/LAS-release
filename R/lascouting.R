@@ -12,13 +12,24 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
   
   network.node <- V(network.graph)$name
   matrix.node <- row.names(express.matrix)
+  if(is.null(network.node)||is.null(matrix.node)) stop("node name can't be null")
+  print(express.matrix)
+  print(network.node)
+  print(matrix.node)
+  
   if(!identical(intersect(network.node,matrix.node),union(network.node,matrix.node))){
     common.node <- getCommonNode(network.graph, express.matrix)
     network.graph <- cleanGraph(network.graph, common.node)
     express.matrix <- cleanMatrix(express.matrix, common.node)
   }
+  else
+  {
+    common.node = network.node
+  }
   size <- length(common.node)
+  
   express.matrix = normalizeInputMatrix(express.matrix)
+  
   if(k!=1)
   {
     graph.connected <- connect.neighborhood(network.graph,k)
@@ -36,6 +47,7 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
 
   result <- foreach(i=1:row.size) %dopar%
   {
+
     xy <- express.matrix[connected.list[i,1],]*express.matrix[connected.list[i,2],]
     la.vector <- c(xy%*%express.matrix.t)
     lfdr <- fdrtool(la.vector, verbose=FALSE, plot = FALSE)$lfdr

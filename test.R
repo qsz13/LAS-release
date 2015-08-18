@@ -405,3 +405,10 @@ for( x in xcandidate)
 }
 
 
+graph <- erdos.renyi.game(50,0.3)
+matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
+seq <- seq(from=1,to=50)
+row.names(matrix) <-seq
+V(graph)$name <- seq
+lascouting(graph,matrix,k=2,n.cores=4)
+
