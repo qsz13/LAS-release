@@ -22,12 +22,4 @@ A logical matrix representing the LA-scouting genes for each gene. Rows represen
 \code{lascouting()} is used to find the liquid association scouting gene
 of LA gene pair(X,Y)
 }
-\examples{
-# Create sample data for examples.
-graph <- erdos.renyi.game(50,0.3)
-matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-seq <- seq(from=1,to=50)
-row.names(matrix) <-seq
-lascouting(graph,matrix,k=2,n.cores=4)
-}
 

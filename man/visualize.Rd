@@ -23,14 +23,6 @@ a graph of gene x,y and w
 \description{
 \code{visualize()} generates a graph. It is used to intuitively and vividly display the layout of gene x, y and w.
 }
-\examples{
-# Create sample data for examples.
-graph <- erdos.renyi.game(50,0.3)
-relate_matrix <- matrix(data=rexp(200,rate=.1), nrow=50, ncol=5, byrow= TRUE, dimnames=NULL)
-#use the first normalize method as an example
-kernel.result <- kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))
-visualize(graph,kernel.result,x,k=2,cutoff=1,path=NULL)
-}
 \seealso{
 \code{\link{kernel.result}}
 }
