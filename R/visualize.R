@@ -47,6 +47,7 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 }
 
 #' visualize with w community: Generate a graph of genes w and their community in different colors.
+#' \code{bisualize.community()}is used to create a graph to vividly display the layout of genes w and their corresponding community.
 #' @param graph The fraph of gene network.
 #' @param kernel.result The result of kernel.density which finds genes z of a gene x.
 #' @seealso \code{\link{kernel.result}} 
@@ -58,7 +59,7 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @return a graph displays genes w and their correspongding community in different colors.
 #' @export
 #'
-visualize.with.community<-function(graph,kernel.result, x, k=2, cutoff=1,community.min=5,path=NULL)
+visualize.community<-function(graph,kernel.result, x, k=2, cutoff=1,community.min=5,path=NULL)
 {
   X = as.character(x)
   Y = V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes=X))]

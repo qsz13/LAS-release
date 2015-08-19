@@ -1,10 +1,10 @@
 #' Evaluate the result using kernel density estimation.#' 
 #'  
-#' There are three common ways to invoke \code{kernel.density}:
+#' There are three common ways to invoke \code{graph.kd}:
 #' \itemize{
-#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("one"))}
-#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("squareM"))}
-#'   \item \code{kernel.density(relate_matrix, graph, smoothing.normalize=c("none"))}
+#'   \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("one"))}
+#'   \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("squareM"))}
+#'   \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("none"))}
 #'   }
 #' The first method is used when the total weight of all genes z is set to 'one'.
 #' In this way, those gene z surrounded by more genes z wll not take advantages over those surrounded by fewer genes.
@@ -20,7 +20,7 @@
 #' @export
 #' 
 #' 
-kernel.density <- function(relate.matrix, network.graph, smoothing.normalize=c("one","squareM","none") ) {
+graph.kd <- function(relate.matrix, network.graph, smoothing.normalize=c("one","squareM","none") ) {
   smoothing.normalize <- match.arg(smoothing.normalize)
   
   network.node <- V(network.graph)$name

@@ -1,6 +1,6 @@
 #' Greate a table to record results. Every gene w's community takes over a row.
 #' 
-#' \code{getgobp()} generates a table. It can be used to record the information of  gene x,  gostats of x, 
+#' \code{getgobp.community()} generates a table. It can be used to record the information of  gene x,  gostats of x, 
 #' gostats of genes within k steps of x, gene w, gostats of w, the similarity of gene w and genes within k 
 #' steps of gene x, the average distance between gene x and gene w.
 #' A gene x may correspond with several w communities. Thus one community takes a row in the table.
@@ -15,7 +15,7 @@
 #' @export
 #' 
 #' 
-getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
+getgobp.community <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
   
   community = apply(z.matrix, 1, getCommunity, graph,cutoff,community.min)
@@ -88,7 +88,7 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 
 #' Greate a table to record results. Every gene x takes over a row.
 #' 
-#' \code{getgobp.x.in.one.line()}generates a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
+#' \code{getgobp.all()}generates a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
 #' the similarity of gene w and genes within k steps of gene x, the average distance between gene x and gene w.
 #' Regardless of a gene X may correspond with multiple w communities. A gene X only takes a row in the table.
 #' @param graph The graph of gene network.
@@ -101,7 +101,7 @@ getgobp <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, 
 #' @return A form contains id of gene w, GO info of gene w , semantic similarity of xk and gene w, average distance between gene x and w.
 #' @export
 #' 
-getgobp.x.in.one.line <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
+getgobp.all <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
 {
   community = apply(z.matrix, 1, getCommunity, graph,cutoff,community.min)
   community = community[!sapply(community, is.null)]
