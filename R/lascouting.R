@@ -16,9 +16,6 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
   network.node <- V(network.graph)$name
   matrix.node <- row.names(express.matrix)
   if(is.null(network.node)||is.null(matrix.node)) stop("node name can't be null")
-  print(express.matrix)
-  print(network.node)
-  print(matrix.node)
   
   if(!identical(intersect(network.node,matrix.node),union(network.node,matrix.node))){
     common.node <- getCommonNode(network.graph, express.matrix)
@@ -30,7 +27,6 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
     common.node = network.node
   }
   size <- length(common.node)
-  print(size)
   
   express.matrix = normalizeInputMatrix(express.matrix)
   
