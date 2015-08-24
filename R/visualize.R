@@ -13,37 +13,35 @@
 #' @export 
 #' 
 #' 
-visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
-{
+visualize <- function(graph, kernel.result, x, k = 2, cutoff = 1, path = NULL) {
   
-  X = as.character(x)
-  Y = V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes=X))]
+  X <- as.character(x)
+  Y <- V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes = X))]
   
-  z = kernel.result[X,]
-  W = names(z[z>cutoff])
-
-  subg = induced.subgraph(graph, unique(c(X,Y,W)))
-
-  type <- vector(mode="character", length=length(V(subg)))
+  z <- kernel.result[X, ]
+  W <- names(z[z > cutoff])
+  
+  subg <- induced.subgraph(graph, unique(c(X, Y, W)))
+  
+  type <- vector(mode = "character", length = length(V(subg)))
   type <- setNames(type, V(subg)$name)
   
-  for(v in W)
-  {
-    type[v] = "W"
+  for (v in W) {
+    type[v] <- "W"
   }
-
-  for(v in Y)
-  {
-    type[v] = "Y"
-  }
-  type[X] = "X"
-
-  network = asNetwork(subg)
-  size = length(V(subg))
-  scale = (17/961)*size + 1999/961
   
-  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1)
-  ggsave(output, file=paste(as.character(x),".jpg",sep = ""), path=path,w=4, h=3, scale=scale,limitsize=FALSE)
+  for (v in Y) {
+    type[v] <- "Y"
+  }
+  type[X] <- "X"
+  
+  network <- asNetwork(subg)
+  size <- length(V(subg))
+  scale <- (17/961) * size + 1999/961
+  
+  output <- ggnet(network, node.group = type, segment.size = 1, label.nodes = T, col = "black", subset.threshold = 1)
+  ggsave(output, file = paste(as.character(x), ".jpg", sep = ""), path = path, w = 4, h = 3, scale = scale, 
+         limitsize = FALSE)
   return(output)
 }
 
@@ -61,46 +59,44 @@ visualize <- function(graph,kernel.result, x, k=2, cutoff=1, path=NULL)
 #' @return a graph displays genes X, X's k-step neighborhood, and W gene communities in different colors.
 #' @export
 #'
-visualize.community<-function(graph,kernel.result, x, k=2, cutoff=1,community.min=5,path=NULL)
-{
-  X = as.character(x)
-  Y = V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes=X))]
-  z = kernel.result[X,]
-
-  W = names(z[z>cutoff])
+visualize.community <- function(graph, kernel.result, x, k = 2, cutoff = 1, community.min = 5, path = NULL) {
+  X <- as.character(x)
+  Y <- V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes = X))]
+  z <- kernel.result[X, ]
   
-  wc = getCommunity(z, graph,cutoff,  community.min)
-  member = membership(wc)
-  community_index = names(sizes(wc)[sizes(wc)>community.min])
-  if(length(community_index)>7)
-  {
+  W <- names(z[z > cutoff])
+  
+  wc <- getCommunity(z, graph, cutoff, community.min)
+  member <- membership(wc)
+  community_index <- names(sizes(wc)[sizes(wc) > community.min])
+  if (length(community_index) > 7) {
     print("comunity too large.")
     return()
   }
   
-  subg = induced.subgraph(graph, unique(c(X,Y,W)))
+  subg <- induced.subgraph(graph, unique(c(X, Y, W)))
   
   type <- rep("other", length(V(subg)))
   type <- setNames(type, V(subg)$name)
-
-  time = 1
-  for(ci in community_index)
-  {
-    w = names(member[member==ci])
-    type[w]=paste("w",time,sep =  "")
-    time<-time+1
+  
+  time <- 1
+  for (ci in community_index) {
+    w <- names(member[member == ci])
+    type[w] = paste("w", time, sep = "")
+    time <- time + 1
   }
-
-  type[Y] = "Y"
-
-  type[X] = "X"
   
-  network = asNetwork(subg)
-  size = length(V(subg))
-  scale = (17/961)*size + 1999/961
-
-  output =  ggnet(network,node.group=type,segment.size=1,label.nodes=T,col="black",subset.threshold = 1)
+  type[Y] <- "Y"
   
-  ggsave(output, file=paste(as.character(x),".jpg",sep = ""), path=path,w=4, h=3, scale=scale,limitsize=FALSE)
+  type[X] <- "X"
+  
+  network <- asNetwork(subg)
+  size <- length(V(subg))
+  scale <- (17/961) * size + 1999/961
+  
+  output <- ggnet(network, node.group = type, segment.size = 1, label.nodes = T, col = "black", subset.threshold = 1)
+  
+  ggsave(output, file = paste(as.character(x), ".jpg", sep = ""), path = path, w = 4, h = 3, scale = scale, 
+         limitsize = FALSE)
   return(output)
 }
