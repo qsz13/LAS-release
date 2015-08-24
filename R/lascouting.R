@@ -1,13 +1,14 @@
-#' Find the liquid association scouting gene
+#' Find the liquid association scouting genes.
 #' 
 #' \code{lascouting()} is used to find the liquid association scouting gene 
-#' of LA gene pair(X,Y)
 #' @useDynLib LAS
 #' @param network.graph An igraph object representing the gene network.
-#' @param express.matrix A matrix represeting the express matrix for the genes in gene network.Row names are the gene id in gene network.
-#' @param k Integer giving the order of the network.
-#' @param n.cores Core number used for parallel computing.
-#' @return A logical matrix representing the LA-scouting genes for each gene. Rows represent the center gene id and columns represents the LA-scouting genes.
+#' @param express.matrix A matrix representing the expression matrix for the genes in gene 
+#' network. Row names are the gene ids in gene network.
+#' @param k Integer giving the order of the ego-network.
+#' @param n.cores Number of cores used for parallel computing.
+#' @return A logical matrix representing the LA-scouting genes for each gene. Rows represent 
+#' the ego gene id and columns represents the LA-scouting genes.
 #' @export
 #' 
 #' 

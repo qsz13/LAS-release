@@ -1,4 +1,4 @@
-#' Evaluate the result using kernel density estimation.#' 
+#' Find weights based on kernel density on the graph.
 #'  
 #' There are three common ways to invoke \code{graph.kd}:
 #' \itemize{
@@ -7,16 +7,16 @@
 #'   \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("none"))}
 #'   }
 #' The first method is used when the total weight of all genes z is set to 'one'.
-#' In this way, those gene z surrounded by more genes z wll not take advantages over those surrounded by fewer genes.
-#' In contrast, the sedcond method takes the number of genes around into consideration, the result of the first method will
-#' multiply the sqare of the number of genes around.
-#' The third method does not normalize the data.
+#' In this way, those genes surrounded by more genes z will not take advantages over those surrounded by fewer genes.
+#' In contrast, the second method takes the number of genes around into consideration, the result of the first method will
+#' multiply the square of the number of genes around.
+#' The third method does not normalize the data. Thus genes with more neighbors are more likely to receive higher weights. 
 #' 
 #' @param relate.matrix The matrix returned by lascouting.
 #' @param network.graph The igraph object representing the gene network.
 #' @param smoothing.normalize Different ways to normalize the result.
-#' @return A matrix representing the kernel density of each gene. Each row is a gene, columns 
-#' are the weights of scouting genes for the gene.  
+#' @return A matrix representing the weights calculated using kernel density for each gene. Each row is an ego gene, columns
+#' are the weights of potential scouting genes for the gene.  
 #' @export
 #' 
 #' 

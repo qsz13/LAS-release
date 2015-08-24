@@ -1,17 +1,20 @@
-#' Greate a table to record results. Every gene w's community takes over a row.
+#' Create a table to record Gene Ontology Biological Process mapping results.  Every gene W's community takes a row.
 #' 
-#' \code{getgobp.community()} generates a table. It can be used to record the information of  gene x,  gostats of x, 
-#' gostats of genes within k steps of x, gene w, gostats of w, the similarity of gene w and genes within k 
-#' steps of gene x, the average distance between gene x and gene w.
-#' A gene x may correspond with several w communities. Thus one community takes a row in the table.
+#' \code{getgobp.community()} generates a result file of ego gene X,  significant GO terms of X, significant GO terms 
+#' of genes within k steps of X, gene W, significant GO terms  of W,
+#’ the similarity of gene W and genes within k steps of gene X, the average distance between gene X and gene W.
+#‘ A gene X may correspond with several W communities. Thus one community takes a row in the table.
 #' @param graph The graph of gene network.
-#' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network.
+#' @param z.matrix A matrix representing gene Z (selected scouting genes). Row names are the gene id in gene network.
 #' @param k An Integer giving the order of the network.
-#' @param n.cores A Core number used for parallel computing.
-#' @param cutoff A number used to find LA scouting gene z.
-#' @param community.min An Integer confines the min gene numbers in community. 
-#' @param term.limit A parameter indicates there is no limit of content in a line of the table.
-#' @return A form contains id of gene w, GO info of gene w , xk.w.semantic.similarity, x.w.avg.distance.
+#' @param n.cores The number of cores used for parallel computing.
+#' @param cutoff The threshold to find LA scouting genes.
+#' @param community.min Integer. The minimum number of genes numbers in a community. 
+#' @param term.limit The maximum number of GO terms to list in a row of the table.
+#' @return A table containing the IDs of scouting center genes W, over-represented GO terms by
+#'  W, semantic similarity on the Gene Ontology system between the X ego network and all 
+#'  scouting center genes, average graph distance between gene X and W. W are grouped by 
+#'  network community. Each W community occupies a row. 
 #' @export
 #' 
 #' 
@@ -86,19 +89,21 @@ getgobp.community <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, communi
 
 }
 
-#' Greate a table to record results. Every gene x takes over a row.
+#' Create a table to record Gene Ontology Biological Process mapping results. Every ego node (X) occupies a row.
 #' 
-#' \code{getgobp.all()}generates a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w, 
-#' the similarity of gene w and genes within k steps of gene x, the average distance between gene x and gene w.
-#' Regardless of a gene X may correspond with multiple w communities. A gene X only takes a row in the table.
-#' @param graph The graph of gene network.
-#' @param z.matrix A matrix representing gene Z. Row names are the gene id in gene network.
+#' \code{getgobp.all()}generates a result file of ego gene X,  significant GO terms of X, significant GO terms
+#'  of genes within k steps of X, gene W, significant GO terms  of W,
+#‘ the similarity of gene W and genes within k steps of gene X, the average distance between gene X and gene W.
+#’ A gene X takes a row in the table.
+#' @param z.matrix A matrix representing gene Z. (selected scouting genes). Row names are the gene id in gene network.
 #' @param k An Integer giving the order of the network.
-#' @param n.cores A Core number used for parallel computing.
-#' @param cutoff A number used to find LA scouting gene z.
+#' @param n.cores The number of cores used for parallel computing.
+#' @param cutoff The threshold to find LA scouting genes.
 #' @param community.min An Integer confines the min gene numbers in community. 
-#' @param term.limit A parameter indicates there is no limit of content in a line of the table.
-#' @return A form contains id of gene w, GO info of gene w , semantic similarity of xk and gene w, average distance between gene x and w.
+#' @param term.limit The maximum number of GO terms to list in a row of the table.
+#' @return A table containing the IDs of scouting center genes W, over-represented GO terms by 
+#' W, semantic similarity on the Gene Ontology system between the X ego network and all scouting
+#'  center genes, average graph distance between gene X and W.
 #' @export
 #' 
 getgobp.all <- function(graph, z.matrix, k=2, n.cores=4, cutoff=1, community.min=5, term.limit=NA)
