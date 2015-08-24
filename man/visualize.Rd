@@ -2,26 +2,28 @@
 % Please edit documentation in R/visualize.R
 \name{visualize}
 \alias{visualize}
-\title{Visualize: Generate a graph which vividly displays the gene x,y and w.}
+\title{Visualize: Generate a graph which vividly displays the gene X, Y and W.}
 \usage{
 visualize(graph, kernel.result, x, k = 2, cutoff = 1, path = NULL)
 }
 \arguments{
-\item{graph}{The graph of gene network.}
+\item{graph}{The igraph object of gene network.}
 
-\item{kernel.result}{The result of kernel.density which finds genes z of a gene x.}
+\item{kernel.result}{The result of graph.kd which finds genes W of a gene X.}
 
-\item{x}{The Gene the graph is generated for.}
+\item{x}{The gene the plot is generated for.}
 
-\item{k}{A specific number stands for the length of step from gene y to gene x.}
+\item{k}{The degree of the neighborhood of X.}
 
-\item{cutoff}{A specific number to filter gene w from gene z.}
+\item{cutoff}{A threshold to filter gene W.}
+
+\item{path}{The path where the result graph is saved to. The default path is the original path of input graph.}
 }
 \value{
-a graph of gene x,y and w
+a graph of gene X, Y and W
 }
 \description{
-\code{visualize()} generates a graph. It is used to intuitively and vividly display the layout of gene x, y and w.
+\code{visualize()} generates a graph. It is used to intuitively and vividly display the layout of gene X, Y and W.
 }
 \seealso{
 \code{\link{kernel.result}}

@@ -2,24 +2,25 @@
 % Please edit documentation in R/lascouting.R
 \name{lascouting}
 \alias{lascouting}
-\title{Find the liquid association scouting gene}
+\title{Find the liquid association scouting genes.}
 \usage{
 lascouting(network.graph, express.matrix, k = 2, n.cores = 4)
 }
 \arguments{
 \item{network.graph}{An igraph object representing the gene network.}
 
-\item{express.matrix}{A matrix represeting the express matrix for the genes in gene network.Row names are the gene id in gene network.}
+\item{express.matrix}{A matrix representing the expression matrix for the genes in gene
+network. Row names are the gene ids in gene network.}
 
-\item{k}{Integer giving the order of the network.}
+\item{k}{Integer giving the order of the ego-network.}
 
-\item{n.cores}{Core number used for parallel computing.}
+\item{n.cores}{Number of cores used for parallel computing.}
 }
 \value{
-A logical matrix representing the LA-scouting genes for each gene. Rows represent the center gene id and columns represents the LA-scouting genes.
+A logical matrix representing the LA-scouting genes for each gene. Rows represent
+the ego gene id and columns represents the LA-scouting genes.
 }
 \description{
 \code{lascouting()} is used to find the liquid association scouting gene
-of LA gene pair(X,Y)
 }
 

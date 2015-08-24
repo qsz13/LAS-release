@@ -2,32 +2,31 @@
 % Please edit documentation in R/getgobp.R
 \name{getgobp.all}
 \alias{getgobp.all}
-\title{Greate a table to record results. Every gene x takes over a row.}
+\title{Create a table to record Gene Ontology Biological Process mapping results. Every ego node (X) occupies a row.}
 \usage{
 getgobp.all(graph, z.matrix, k = 2, n.cores = 4, cutoff = 1,
   community.min = 5, term.limit = NA)
 }
 \arguments{
-\item{graph}{The graph of gene network.}
-
-\item{z.matrix}{A matrix representing gene Z. Row names are the gene id in gene network.}
+\item{z.matrix}{A matrix representing gene Z. (selected scouting genes). Row names are the gene id in gene network.}
 
 \item{k}{An Integer giving the order of the network.}
 
-\item{n.cores}{A Core number used for parallel computing.}
+\item{n.cores}{The number of cores used for parallel computing.}
 
-\item{cutoff}{A number used to find LA scouting gene z.}
+\item{cutoff}{The threshold to find LA scouting genes.}
 
 \item{community.min}{An Integer confines the min gene numbers in community.}
 
-\item{term.limit}{A parameter indicates there is no limit of content in a line of the table.}
+\item{term.limit}{The maximum number of GO terms to list in a row of the table.}
 }
 \value{
-A form contains id of gene w, GO info of gene w , semantic similarity of xk and gene w, average distance between gene x and w.
+A table containing the IDs of scouting center genes W, over-represented GO terms by
+W, semantic similarity on the Gene Ontology system between the X ego network and all scouting
+ center genes, average graph distance between gene X and W.
 }
 \description{
-\code{getgobp.all()}generates a result file of gene x,  gostats of x, gostats of genes within k steps of x, gene w, gostats of w,
-the similarity of gene w and genes within k steps of gene x, the average distance between gene x and gene w.
-Regardless of a gene X may correspond with multiple w communities. A gene X only takes a row in the table.
+\code{getgobp.all()}generates a result file of ego gene X,  significant GO terms of X, significant GO terms
+ of genes within k steps of X, gene W, significant GO terms  of W,
 }
 

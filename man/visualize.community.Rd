@@ -2,33 +2,35 @@
 % Please edit documentation in R/visualize.R
 \name{visualize.community}
 \alias{visualize.community}
-\title{visualize with w community: Generate a graph of genes w and their community in different colors.
-\code{bisualize.community()}is used to create a graph to vividly display the layout of genes w and their corresponding community.}
+\title{visualize ego gene X, its k step neighbours, and the W gene communities: Generate a graph
+with different community in different colors.
+\code{visualize.community()}is used to create a graph to display the layout of genes X, X's k-step neighborhood, W and their corresponding community.}
 \usage{
 visualize.community(graph, kernel.result, x, k = 2, cutoff = 1,
   community.min = 5, path = NULL)
 }
 \arguments{
-\item{graph}{The fraph of gene network.}
+\item{graph}{The igraph object of gene network.}
 
-\item{kernel.result}{The result of kernel.density which finds genes z of a gene x.}
+\item{kernel.result}{The result of graph.kd which finds genes W of a gene X.}
 
-\item{x}{The Gene the graph is generated for.}
+\item{x}{The gene the plot is generated for.}
 
-\item{k}{A specific number stands for the length of step from gene y to gene x.}
+\item{k}{The degree of the neighborhood of X.}
 
-\item{cutoff}{A specific number to filter gene w from gene z.}
+\item{cutoff}{A threshold to filter gene W.}
 
-\item{path}{The path where the result graph is saved to.The default path is the original path of input graph.}
+\item{path}{The path where the result graph is saved to. The default path is the original path of input graph.}
 
-\item{cummunity.min}{An Integer confines the least number of genes in a community of w shown in graph.}
+\item{cummunity.min}{The minimum size of the community of W.}
 }
 \value{
-a graph displays genes w and their correspongding community in different colors.
+a graph displays genes X, X's k-step neighborhood, and W gene communities in different colors.
 }
 \description{
-visualize with w community: Generate a graph of genes w and their community in different colors.
-\code{bisualize.community()}is used to create a graph to vividly display the layout of genes w and their corresponding community.
+visualize ego gene X, its k step neighbours, and the W gene communities: Generate a graph
+with different community in different colors.
+\code{visualize.community()}is used to create a graph to display the layout of genes X, X's k-step neighborhood, W and their corresponding community.
 }
 \seealso{
 \code{\link{kernel.result}}
