@@ -51,7 +51,6 @@ lascouting <- function(network.graph, express.matrix, k=2, n.cores=4){
 
     xy <- express.matrix[connected.list[i,1],]*express.matrix[connected.list[i,2],]
     la.vector <- c(xy%*%express.matrix.t)
-    print(la.vector)
     lfdr <- fdrtool(la.vector, verbose=FALSE, plot = FALSE)$lfdr
     return(rownames(express.matrix)[which(lfdr<0.2)])
     
