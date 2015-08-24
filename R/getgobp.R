@@ -172,7 +172,7 @@ get.W.GO <- function(ci, member, xk, x, graph, all.entrez, term.limit) {
   
   
   xk.w.semantic.similarity <- clusterSim(c(w), c(xk), combine = "avg")
-  x.w.avg.distance <- mean(shortest.paths(graph, v = w, to = x))
+  x.w.avg.distance <- mean(igraph::shortest.paths(graph, v = w, to = x))
   w <- paste(w, collapse = " ")
   
   return(data.frame(w, wgo, xk.w.semantic.similarity, x.w.avg.distance))

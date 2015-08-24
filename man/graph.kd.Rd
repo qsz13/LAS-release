@@ -21,9 +21,9 @@ are the weights of potential scouting genes for the gene.
 \description{
 There are three common ways to invoke \code{graph.kd}:
 \itemize{
-  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("one"))}
-  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("squareM"))}
-  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c("none"))}
+  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c('one'))}
+  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c('squareM'))}
+  \item \code{graph.kd(relate_matrix, graph, smoothing.normalize=c('none'))}
   }
 The first method is used when the total weight of all genes z is set to 'one'.
 In this way, those genes surrounded by more genes z will not take advantages over those surrounded by fewer genes.

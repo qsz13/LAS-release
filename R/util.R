@@ -32,7 +32,7 @@ getCommunity <- function(z, g, cutoff, community.min) {
     return(NULL)
   }
   subg <- induced.subgraph(graph = g, vids = zcutoff)
-  wc <- walktrap.community(subg)
+  wc <- igraph::walktrap.community(subg)
   
   member <- membership(wc)
   w <- names(member[member == which.max(sizes(wc))])

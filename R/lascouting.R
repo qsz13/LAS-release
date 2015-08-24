@@ -50,7 +50,7 @@ lascouting <- function(network.graph, express.matrix, k = 2, n.cores = 4) {
   }
   stopCluster(cl)
   matrix.rowname = rownames(express.matrix)
-  node.z <- Matrix(0, nrow = size, ncol = size, dimnames = list(matrix.rowname, matrix.rowname)))
+  node.z <- Matrix(0, nrow = size, ncol = size, dimnames = list(matrix.rowname, matrix.rowname))
   for (i in 1:row.size) {
     if (length(result[[i]]) != 0) {
       x <- connected.list[i, 1]
