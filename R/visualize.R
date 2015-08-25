@@ -17,7 +17,7 @@ visualize <- function(graph, kernel.result, x, k = 2, cutoff = 1, path = NULL) {
   
   X <- as.character(x)
   Y <- V(graph)$name[unlist(igraph::neighborhood(graph, k, nodes = X))]
-  
+  print(Y)
   z <- kernel.result[X, ]
   W <- names(z[z > cutoff])
   
